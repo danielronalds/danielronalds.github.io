@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useDraggable } from '../composables/useDraggable'
+import { useResizable } from '../composables/useResizable'
 
 const { name = 'Window' } = defineProps<{ name?: string }>()
 
-const width = ref(500)
-const height = ref(400)
-const { x, y, onMouseDown } = useDraggable(10, 10)
+const { x, y, onMouseDown: onDragMouseDown } = useDraggable(10, 10)
+const { width, height, onMouseDown: onResizeMouseDown } = useResizable(500, 400)
 
 const style = computed(() => ({
   top: `${y.value}px`,
@@ -17,10 +17,10 @@ const style = computed(() => ({
 </script>
 
 <template>
-  <div class="bg-slate-100 absolute shadow-md overflow-y-hidden rounded-xl" :style="style">
+  <div class="bg-base-200 absolute shadow-lg overflow-y-hidden rounded-xl" :style="style">
     <header
-      @mousedown="onMouseDown"
-      class="p-2 bg-slate-50 cursor-grab active:cursor-grabbing select-none"
+      @mousedown="onDragMouseDown"
+      class="p-2 bg-base-100 cursor-grab active:cursor-grabbing select-none"
     >
       <p class="font-semibold">{{ name }}</p>
     </header>
@@ -28,5 +28,10 @@ const style = computed(() => ({
     <div class="overflow-y-auto">
       <slot />
     </div>
+
+    <div
+      @mousedown="onResizeMouseDown"
+      class="absolute bottom-0 right-0 w-3 h-3 cursor-nwse-resize"
+    />
   </div>
 </template>
