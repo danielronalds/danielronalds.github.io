@@ -35,5 +35,5 @@ export const useResizable = (
     document.addEventListener('mouseup', onMouseUp)
   }
 
-  return { width, height, onMouseDown }
+  return { width, height, onMouseDown, isResizing }
 }

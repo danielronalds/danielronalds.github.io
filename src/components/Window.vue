@@ -6,7 +6,7 @@ import { useResizable } from '../composables/useResizable'
 const { name = 'Window' } = defineProps<{ name?: string }>()
 
 const { x, y, onMouseDown: onDragMouseDown } = useDraggable(10, 10)
-const { width, height, onMouseDown: onResizeMouseDown } = useResizable(500, 400)
+const { width, height, onMouseDown: onResizeMouseDown, isResizing } = useResizable(500, 400)
 
 const style = computed(() => ({
   top: `${y.value}px`,
@@ -25,7 +25,7 @@ const style = computed(() => ({
       <p class="font-semibold">{{ name }}</p>
     </header>
 
-    <div class="overflow-y-auto">
+    <div class="overflow-y-auto" :class="{ 'select-none': isResizing }">
       <slot />
     </div>
 
