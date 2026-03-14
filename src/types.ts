@@ -11,6 +11,6 @@ export interface WindowInstance {
   size: Size;
 }
 
-export enum Applications {
+export enum Application {
   HelloWorld = 'helloWorld',
 }

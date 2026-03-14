@@ -34,7 +34,10 @@ const style = computed(() => ({
       @mousedown="onDragMouseDown"
       class="p-2 bg-ef-bg1 cursor-grab active:cursor-grabbing select-none flex flex-row justify-between"
     >
-      <p class="font-semibold">{{ name }}</p>
+      <div class="flex flex-row w-fit gap-2 items-center">
+        <slot name="icon" />
+        <p class="font-semibold">{{ name }}</p>
+      </div>
 
       <div class="flex flex-row gap-2">
         <button @click="$emit('minimized')" class="cursor-pointer">

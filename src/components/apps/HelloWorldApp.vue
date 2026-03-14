@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Window from '../Window.vue';
 import type { Position, Size } from '../../types';
+import { Hand } from 'lucide-vue-next';
 
 defineProps<{ id: string }>();
 
@@ -20,6 +21,10 @@ const size = defineModel<Size>('size', { required: true });
     @closed="$emit('closed')"
     @minimized="isMinimized = true"
   >
+    <template #icon>
+      <Hand :size="16"/>
+    </template>
+
     <div class="flex w-full h-40 justify-center items-center flex-col">
       <p>Hello world!</p>
       <p>{{ id }}</p>

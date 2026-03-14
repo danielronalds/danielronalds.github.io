@@ -2,8 +2,9 @@
 import { ref, type Ref } from 'vue';
 import HelloWorldApp from './apps/HelloWorldApp.vue';
 import type { WindowInstance } from '../types';
-import { Applications, DEFAULT_WINDOW_SIZE } from '../types';
+import { Application, DEFAULT_WINDOW_SIZE } from '../types';
 import { generateId, getDefaultWindowPosition } from '../lib';
+import HelloWorldIcon from './apps/HelloWorldIcon.vue';
 
 const windows: Ref<WindowInstance[]> = ref([]);
 
@@ -13,10 +14,11 @@ const removeWindow = (id: string) => {
   windows.value.splice(index, 1);
 };
 
-const addHelloWorldWindow = () => {
+
+const launchApplication = (application: Application) => {
   windows.value.push({
     id: generateId(),
-    type: Applications.HelloWorld,
+    type: application,
     position: getDefaultWindowPosition(DEFAULT_WINDOW_SIZE),
     size: DEFAULT_WINDOW_SIZE,
   });
@@ -27,17 +29,12 @@ const addHelloWorldWindow = () => {
   <div class="absolute -z-10 inset-0 h-full w-full bg-[url(/background.jpg)] bg-cover bg-center" />
 
   <nav class="flex flex-col gap-2 p-4">
-    <button
-      class="p-2 rounded-lg bg-ef-aqua shadow-md w-fit h-fit cursor-pointer"
-      @click="addHelloWorldWindow"
-    >
-      <p class="text-2xl">👋</p>
-    </button>
+    <HelloWorldIcon @click="() => launchApplication(Application.HelloWorld)" />
   </nav>
 
   <div v-for="window in windows" :key="window.id">
     <HelloWorldApp
-      v-if="window.type === Applications.HelloWorld"
+      v-if="window.type === Application.HelloWorld"
       v-model:position="window.position"
       v-model:size="window.size"
       @closed="() => removeWindow(window.id)"
