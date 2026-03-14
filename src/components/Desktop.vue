@@ -2,7 +2,8 @@
 import { ref, type Ref } from 'vue'
 import HelloWorldApp from './apps/HelloWorldApp.vue'
 import type { WindowInstance } from '../types'
-import { DEFAULT_WINDOW_POSITION, DEFAULT_WINDOW_SIZE } from '../types'
+import { DEFAULT_WINDOW_SIZE } from '../types'
+import { generateId, getDefaultWindowPosition } from '../lib'
 
 const HelloWorld = 'helloWorld'
 
@@ -14,22 +15,11 @@ const removeWindow = (id: string) => {
   windows.value.splice(index, 1)
 }
 
-const generateWindowId = () => {
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz'
-  let randomString = ''
-
-  for (let i = 0; i < 10; i++) {
-    randomString += alphabet[Math.floor(Math.random() * alphabet.length)]
-  }
-
-  return randomString
-}
-
 const addHelloWorldWindow = () => {
   windows.value.push({
-    id: generateWindowId(),
+    id: generateId(),
     type: HelloWorld,
-    position: DEFAULT_WINDOW_POSITION,
+    position: getDefaultWindowPosition(DEFAULT_WINDOW_SIZE),
     size: DEFAULT_WINDOW_SIZE,
   })
 }

@@ -3,7 +3,8 @@ import { computed } from 'vue'
 import { useDraggable } from '../composables/useDraggable'
 import { useResizable } from '../composables/useResizable'
 import type { Position, Size } from '../types'
-import { DEFAULT_WINDOW_POSITION, DEFAULT_WINDOW_SIZE } from '../types'
+import { DEFAULT_WINDOW_SIZE } from '../types'
+import { getDefaultWindowPosition } from '../lib'
 
 import { Minus, X } from 'lucide-vue-next'
 
@@ -12,7 +13,7 @@ const { name = 'Window' } = defineProps<{ name?: string }>()
 defineEmits<{ closed: []; minimized: [] }>()
 
 const position = defineModel<Position>('position', {
-  default: () => ({ ...DEFAULT_WINDOW_POSITION }),
+  default: () => getDefaultWindowPosition(DEFAULT_WINDOW_SIZE),
 })
 const size = defineModel<Size>('size', { default: () => ({ ...DEFAULT_WINDOW_SIZE }) })
 
