@@ -2,6 +2,8 @@
 import { computed } from 'vue'
 import { useDraggable } from '../composables/useDraggable'
 import { useResizable } from '../composables/useResizable'
+import type { Position, Size } from '../types'
+import { DEFAULT_WINDOW_POSITION, DEFAULT_WINDOW_SIZE } from '../types'
 
 import { Minus, X } from 'lucide-vue-next'
 
@@ -9,14 +11,19 @@ const { name = 'Window' } = defineProps<{ name?: string }>()
 
 defineEmits<{ closed: []; minimized: [] }>()
 
-const { x, y, onMouseDown: onDragMouseDown } = useDraggable(10, 10)
-const { width, height, onMouseDown: onResizeMouseDown, isResizing } = useResizable(500, 400)
+const position = defineModel<Position>('position', {
+  default: () => ({ ...DEFAULT_WINDOW_POSITION }),
+})
+const size = defineModel<Size>('size', { default: () => ({ ...DEFAULT_WINDOW_SIZE }) })
+
+const { onMouseDown: onDragMouseDown } = useDraggable(position)
+const { onMouseDown: onResizeMouseDown, isResizing } = useResizable(size)
 
 const style = computed(() => ({
-  top: `${y.value}px`,
-  left: `${x.value}px`,
-  width: `${width.value}px`,
-  height: `${height.value}px`,
+  top: `${position.value.y}px`,
+  left: `${position.value.x}px`,
+  width: `${size.value.width}px`,
+  height: `${size.value.height}px`,
 }))
 </script>
 

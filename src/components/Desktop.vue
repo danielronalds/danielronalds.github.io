@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
 import HelloWorldApp from './apps/HelloWorldApp.vue'
+import type { WindowInstance } from '../types'
+import { DEFAULT_WINDOW_POSITION, DEFAULT_WINDOW_SIZE } from '../types'
 
 const HelloWorld = 'helloWorld'
-
-type WindowType = typeof HelloWorld
-
-interface WindowInstance {
-  id: string
-  type: WindowType
-}
 
 const windows: Ref<WindowInstance[]> = ref([])
 
@@ -23,7 +18,7 @@ const generateWindowId = () => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'
   let randomString = ''
 
-  for (var i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     randomString += alphabet[Math.floor(Math.random() * alphabet.length)]
   }
 
@@ -31,7 +26,12 @@ const generateWindowId = () => {
 }
 
 const addHelloWorldWindow = () => {
-  windows.value.push({ id: generateWindowId(), type: HelloWorld })
+  windows.value.push({
+    id: generateWindowId(),
+    type: HelloWorld,
+    position: DEFAULT_WINDOW_POSITION,
+    size: DEFAULT_WINDOW_SIZE,
+  })
 }
 </script>
 
@@ -49,12 +49,13 @@ const addHelloWorldWindow = () => {
     </button>
   </nav>
 
-  <div v-for="window in windows">
+  <div v-for="window in windows" :key="window.id">
     <HelloWorldApp
       v-if="window.type === HelloWorld"
+      v-model:position="window.position"
+      v-model:size="window.size"
       @closed="() => removeWindow(window.id)"
       :id="window.id"
-      :key="window.id"
     />
   </div>
 </template>

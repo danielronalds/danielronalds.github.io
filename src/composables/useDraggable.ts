@@ -1,11 +1,9 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
+import type { Position } from '../types'
 
-export const useDraggable = (initialX = 0, initialY = 0) => {
-  const x = ref(initialX)
-  const y = ref(initialY)
-
+export const useDraggable = (position: Ref<Position>) => {
   const isDragging = ref(false)
-  const lastMousePosition = ref({ x: 0, y: 0 })
+  const lastMousePosition = ref<Position>({ x: 0, y: 0 })
 
   const onMouseUp = () => {
     isDragging.value = false
@@ -16,8 +14,10 @@ export const useDraggable = (initialX = 0, initialY = 0) => {
   const onMouseMove = (event: MouseEvent) => {
     if (!isDragging.value) return
 
-    x.value += event.clientX - lastMousePosition.value.x
-    y.value += event.clientY - lastMousePosition.value.y
+    position.value = {
+      x: position.value.x + event.clientX - lastMousePosition.value.x,
+      y: position.value.y + event.clientY - lastMousePosition.value.y,
+    }
 
     lastMousePosition.value = { x: event.clientX, y: event.clientY }
   }
@@ -29,5 +29,5 @@ export const useDraggable = (initialX = 0, initialY = 0) => {
     document.addEventListener('mouseup', onMouseUp)
   }
 
-  return { x, y, onMouseDown }
+  return { onMouseDown }
 }

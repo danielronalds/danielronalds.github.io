@@ -1,14 +1,7 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
+import type { Size } from '../types'
 
-export const useResizable = (
-  initialWidth = 200,
-  initialHeight = 200,
-  minWidth: number = 100,
-  minHeight: number = 100,
-) => {
-  const width = ref(initialWidth)
-  const height = ref(initialHeight)
-
+export const useResizable = (size: Ref<Size>, minWidth = 100, minHeight = 100) => {
   const isResizing = ref(false)
   const lastMousePosition = ref({ x: 0, y: 0 })
 
@@ -21,8 +14,10 @@ export const useResizable = (
   const onMouseMove = (event: MouseEvent) => {
     if (!isResizing.value) return
 
-    width.value = Math.max(minWidth, width.value + event.clientX - lastMousePosition.value.x)
-    height.value = Math.max(minHeight, height.value + event.clientY - lastMousePosition.value.y)
+    size.value = {
+      width: Math.max(minWidth, size.value.width + event.clientX - lastMousePosition.value.x),
+      height: Math.max(minHeight, size.value.height + event.clientY - lastMousePosition.value.y),
+    }
 
     lastMousePosition.value = { x: event.clientX, y: event.clientY }
   }
@@ -34,5 +29,5 @@ export const useResizable = (
     document.addEventListener('mouseup', onMouseUp)
   }
 
-  return { width, height, onMouseDown, isResizing }
+  return { onMouseDown, isResizing }
 }
