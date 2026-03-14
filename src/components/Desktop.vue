@@ -1,28 +1,26 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue'
-import HelloWorldApp from './apps/HelloWorldApp.vue'
-import type { WindowInstance } from '../types'
-import { DEFAULT_WINDOW_SIZE } from '../types'
-import { generateId, getDefaultWindowPosition } from '../lib'
+import { ref, type Ref } from 'vue';
+import HelloWorldApp from './apps/HelloWorldApp.vue';
+import type { WindowInstance } from '../types';
+import { Applications, DEFAULT_WINDOW_SIZE } from '../types';
+import { generateId, getDefaultWindowPosition } from '../lib';
 
-const HelloWorld = 'helloWorld'
-
-const windows: Ref<WindowInstance[]> = ref([])
+const windows: Ref<WindowInstance[]> = ref([]);
 
 const removeWindow = (id: string) => {
-  const index = windows.value.findIndex((w) => w.id === id)
+  const index = windows.value.findIndex((w) => w.id === id);
 
-  windows.value.splice(index, 1)
-}
+  windows.value.splice(index, 1);
+};
 
 const addHelloWorldWindow = () => {
   windows.value.push({
     id: generateId(),
-    type: HelloWorld,
+    type: Applications.HelloWorld,
     position: getDefaultWindowPosition(DEFAULT_WINDOW_SIZE),
     size: DEFAULT_WINDOW_SIZE,
-  })
-}
+  });
+};
 </script>
 
 <template>
@@ -41,7 +39,7 @@ const addHelloWorldWindow = () => {
 
   <div v-for="window in windows" :key="window.id">
     <HelloWorldApp
-      v-if="window.type === HelloWorld"
+      v-if="window.type === Applications.HelloWorld"
       v-model:position="window.position"
       v-model:size="window.size"
       @closed="() => removeWindow(window.id)"

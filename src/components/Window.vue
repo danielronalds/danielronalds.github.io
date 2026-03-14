@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useDraggable } from '../composables/useDraggable'
-import { useResizable } from '../composables/useResizable'
-import type { Position, Size } from '../types'
-import { DEFAULT_WINDOW_SIZE } from '../types'
-import { getDefaultWindowPosition } from '../lib'
+import { computed } from 'vue';
+import { useDraggable } from '../composables/useDraggable';
+import { useResizable } from '../composables/useResizable';
+import type { Position, Size } from '../types';
+import { DEFAULT_WINDOW_SIZE } from '../types';
+import { getDefaultWindowPosition } from '../lib';
 
-import { Minus, X } from 'lucide-vue-next'
+import { Minus, X } from 'lucide-vue-next';
 
-const { name = 'Window' } = defineProps<{ name?: string }>()
+const { name = 'Window' } = defineProps<{ name?: string }>();
 
-defineEmits<{ closed: []; minimized: [] }>()
+defineEmits<{ closed: []; minimized: [] }>();
 
 const position = defineModel<Position>('position', {
   default: () => getDefaultWindowPosition(DEFAULT_WINDOW_SIZE),
-})
-const size = defineModel<Size>('size', { default: () => ({ ...DEFAULT_WINDOW_SIZE }) })
+});
+const size = defineModel<Size>('size', { default: () => ({ ...DEFAULT_WINDOW_SIZE }) });
 
-const { onMouseDown: onDragMouseDown } = useDraggable(position)
-const { onMouseDown: onResizeMouseDown, isResizing } = useResizable(size)
+const { onMouseDown: onDragMouseDown } = useDraggable(position);
+const { onMouseDown: onResizeMouseDown, isResizing } = useResizable(size);
 
 const style = computed(() => ({
   top: `${position.value.y}px`,
   left: `${position.value.x}px`,
   width: `${size.value.width}px`,
   height: `${size.value.height}px`,
-}))
+}));
 </script>
 
 <template>

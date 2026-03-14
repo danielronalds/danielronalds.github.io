@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import Window from '../Window.vue'
-import type { Position, Size } from '../../types'
+import Window from '../Window.vue';
+import type { Position, Size } from '../../types';
 
-defineProps<{ id: string }>()
+defineProps<{ id: string }>();
 
-defineEmits<{ closed: [] }>()
+defineEmits<{ closed: [] }>();
 
-const isMinimized = defineModel('isMinimized', { default: false })
-const position = defineModel<Position>('position', { required: true })
-const size = defineModel<Size>('size', { required: true })
+const isMinimized = defineModel('isMinimized', { default: false });
+const position = defineModel<Position>('position', { required: true });
+const size = defineModel<Size>('size', { required: true });
 </script>
 
 <template>
