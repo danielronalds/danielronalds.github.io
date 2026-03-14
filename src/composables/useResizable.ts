@@ -1,6 +1,5 @@
 import { ref } from 'vue'
 
-
 export const useResizable = (
   initialWidth = 200,
   initialHeight = 200,
