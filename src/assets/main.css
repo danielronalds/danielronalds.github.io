@@ -1,6 +1,43 @@
 @import 'tailwindcss';
-@plugin 'daisyui';
 
-@plugin "daisyui" {
-  themes: lofi --default;
+@theme {
+  /* Everforest Namespace */
+  --color-ef-bg-dim: #232a2e;
+  --color-ef-bg0: #2d353b;
+  --color-ef-bg1: #343f44;
+  --color-ef-bg2: #3d484d;
+  --color-ef-bg3: #475258;
+  --color-ef-bg4: #4f585e;
+  --color-ef-bg5: #56635f;
+
+  --color-ef-bg-red: #514045;
+  --color-ef-bg-yellow: #4d4c43;
+  --color-ef-bg-green: #425047;
+  --color-ef-bg-blue: #3a515d;
+  --color-ef-bg-purple: #4a444e;
+  --color-ef-bg-visual: #543a48;
+
+  --color-ef-fg: #d3c6aa;
+
+  --color-ef-red: #e67e80;
+  --color-ef-yellow: #dbbc7f;
+  --color-ef-green: #a7c080;
+  --color-ef-blue: #7fbbb3;
+  --color-ef-purple: #d699b6;
+  --color-ef-aqua: #83c092;
+  --color-ef-orange: #e69875;
+
+  --color-ef-grey0: #7a8478;
+  --color-ef-grey1: #859289;
+  --color-ef-grey2: #9da9a0;
+
+  --color-ef-statusline1: #a7c080;
+  --color-ef-statusline2: #d3c6aa;
+  --color-ef-statusline3: #e67e80;
+}
+
+@layer base {
+  body {
+    @apply bg-ef-bg0 text-ef-fg;
+  }
 }

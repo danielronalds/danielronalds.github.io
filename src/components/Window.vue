@@ -29,10 +29,10 @@ const style = computed(() => ({
 </script>
 
 <template>
-  <div class="bg-base-200 absolute shadow-lg overflow-y-hidden rounded-xl" :style="style">
+  <div class="bg-ef-bg0 absolute shadow-lg overflow-y-hidden rounded-xl" :style="style">
     <header
       @mousedown="onDragMouseDown"
-      class="p-2 bg-base-100 cursor-grab active:cursor-grabbing select-none flex flex-row justify-between"
+      class="p-2 bg-ef-bg1 cursor-grab active:cursor-grabbing select-none flex flex-row justify-between"
     >
       <p class="font-semibold">{{ name }}</p>
 

@@ -30,7 +30,7 @@ const addHelloWorldWindow = () => {
 
   <nav class="flex flex-col gap-2 p-4">
     <button
-      class="p-2 rounded-lg bg-blue-200 shadow-md w-fit h-fit cursor-pointer"
+      class="p-2 rounded-lg bg-ef-aqua shadow-md w-fit h-fit cursor-pointer"
       @click="addHelloWorldWindow"
     >
       <p class="text-2xl">👋</p>
