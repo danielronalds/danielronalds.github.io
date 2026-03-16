@@ -1,7 +1,7 @@
 import { ref, type Ref } from 'vue';
 import type { Size } from '../types';
 
-export const useResizable = (size: Ref<Size>, minWidth = 100, minHeight = 100) => {
+export const useResizable = (size: Ref<Size>, minSize: Size = { width: 200, height: 300 }) => {
   const isResizing = ref(false);
   const lastMousePosition = ref({ x: 0, y: 0 });
 
@@ -15,8 +15,8 @@ export const useResizable = (size: Ref<Size>, minWidth = 100, minHeight = 100) =
     if (!isResizing.value) return;
 
     size.value = {
-      width: Math.max(minWidth, size.value.width + event.clientX - lastMousePosition.value.x),
-      height: Math.max(minHeight, size.value.height + event.clientY - lastMousePosition.value.y),
+      width: Math.max(minSize.width, size.value.width + event.clientX - lastMousePosition.value.x),
+      height: Math.max(minSize.height, size.value.height + event.clientY - lastMousePosition.value.y),
     };
 
     lastMousePosition.value = { x: event.clientX, y: event.clientY };

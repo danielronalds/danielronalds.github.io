@@ -14,7 +14,6 @@ const removeWindow = (id: string) => {
   windows.value.splice(index, 1);
 };
 
-
 const launchApplication = (application: Application) => {
   windows.value.push({
     id: generateId(),
@@ -23,10 +22,15 @@ const launchApplication = (application: Application) => {
     size: DEFAULT_WINDOW_SIZE,
   });
 };
+
+// Starting the hello world one by default
+launchApplication(Application.HelloWorld);
 </script>
 
 <template>
-  <div class="absolute -z-10 inset-0 h-full w-full bg-[url(/background.jpg)] bg-cover bg-center" />
+  <div
+    class="absolute -z-10 inset-0 h-full w-full bg-[url(assets/background.jpg)] bg-cover bg-center"
+  />
 
   <nav class="flex flex-col gap-2 p-4">
     <HelloWorldIcon @click="() => launchApplication(Application.HelloWorld)" />

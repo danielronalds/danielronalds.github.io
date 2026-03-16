@@ -4,9 +4,10 @@ import { Hand } from 'lucide-vue-next';
 defineEmits<{ click: [] }>();
 </script>
 <template>
-  <button class="p-2 rounded-lg bg-ef-aqua shadow-md size-14 cursor-pointer flex justify-center
-    items-center
-     " @click="$emit('click')">
+  <button
+    class="p-2 rounded-lg bg-ef-aqua shadow-md size-14 cursor-pointer flex justify-center items-center"
+    @click="$emit('click')"
+  >
     <Hand :size="30" />
   </button>
 </template>

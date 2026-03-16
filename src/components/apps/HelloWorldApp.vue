@@ -22,12 +22,19 @@ const size = defineModel<Size>('size', { required: true });
     @minimized="isMinimized = true"
   >
     <template #icon>
-      <Hand :size="16"/>
+      <Hand :size="16" />
     </template>
 
-    <div class="flex w-full h-40 justify-center items-center flex-col">
-      <p>Hello world!</p>
-      <p>{{ id }}</p>
+    <div class="w-full flex flex-col gap-6 justify-center items-center text-center p-10">
+      <img
+        src="/assets/avatar.jpg"
+        class="size-36 rounded-full object-cover object-bottom-left mx-auto"
+      />
+      <p>👋 Hi, I'm Daniel. I like building stuff</p>
+      <p>
+        This is my personal website, poke around and have a look what's on it. The inspiration is
+        for it to be a desktop like experience!
+      </p>
     </div>
   </Window>
 </template>
