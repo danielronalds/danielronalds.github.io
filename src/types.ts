@@ -13,4 +13,5 @@ export interface WindowInstance {
 
 export enum Application {
   HelloWorld = 'helloWorld',
+  Terminal = 'terminal',
 }

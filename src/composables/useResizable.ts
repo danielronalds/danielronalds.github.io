@@ -16,7 +16,10 @@ export const useResizable = (size: Ref<Size>, minSize: Size = { width: 200, heig
 
     size.value = {
       width: Math.max(minSize.width, size.value.width + event.clientX - lastMousePosition.value.x),
-      height: Math.max(minSize.height, size.value.height + event.clientY - lastMousePosition.value.y),
+      height: Math.max(
+        minSize.height,
+        size.value.height + event.clientY - lastMousePosition.value.y,
+      ),
     };
 
     lastMousePosition.value = { x: event.clientX, y: event.clientY };

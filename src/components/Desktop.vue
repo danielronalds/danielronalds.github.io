@@ -5,6 +5,8 @@ import type { WindowInstance } from '../types';
 import { Application, DEFAULT_WINDOW_SIZE } from '../types';
 import { generateId, getDefaultWindowPosition } from '../lib';
 import HelloWorldIcon from './apps/HelloWorldIcon.vue';
+import TerminalApp from './apps/TerminalApp.vue';
+import TerminalIcon from './apps/TerminalIcon.vue';
 
 const windows: Ref<WindowInstance[]> = ref([]);
 
@@ -28,17 +30,24 @@ launchApplication(Application.HelloWorld);
 </script>
 
 <template>
-  <div
-    class="absolute -z-10 inset-0 h-full w-full bg-cover bg-center"
-  />
+  <div class="absolute -z-10 inset-0 h-full w-full bg-cover bg-center" />
 
   <nav class="flex flex-col gap-2 p-4">
     <HelloWorldIcon @click="() => launchApplication(Application.HelloWorld)" />
+    <TerminalIcon @click="() => launchApplication(Application.Terminal)" />
   </nav>
 
   <div v-for="window in windows" :key="window.id">
     <HelloWorldApp
       v-if="window.type === Application.HelloWorld"
+      v-model:position="window.position"
+      v-model:size="window.size"
+      @closed="() => removeWindow(window.id)"
+      :id="window.id"
+    />
+
+    <TerminalApp
+      v-if="window.type === Application.Terminal"
       v-model:position="window.position"
       v-model:size="window.size"
       @closed="() => removeWindow(window.id)"
