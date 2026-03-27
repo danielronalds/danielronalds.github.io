@@ -1,0 +1,6 @@
+- [ ] Implement window layering (e.g. setting z-index on click)
+- [ ] Implement tooltips for window icons
+- [ ] Terminal CLI!
+- [ ] Resume Page
+- [ ] File system...?
+- [ ] Projects page
