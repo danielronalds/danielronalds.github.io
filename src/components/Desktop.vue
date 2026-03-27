@@ -29,7 +29,7 @@ launchApplication(Application.HelloWorld);
 
 <template>
   <div
-    class="absolute -z-10 inset-0 h-full w-full bg-[url(assets/background.jpg)] bg-cover bg-center"
+    class="absolute -z-10 inset-0 h-full w-full bg-cover bg-center"
   />
 
   <nav class="flex flex-col gap-2 p-4">
