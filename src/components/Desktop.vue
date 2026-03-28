@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
-import HelloWorldApp from './apps/HelloWorldApp.vue';
-import type { WindowInstance } from '../types';
-import { Application, DEFAULT_WINDOW_SIZE } from '../types';
-import { generateId, getDefaultWindowPosition } from '../lib';
-import HelloWorldIcon from './apps/HelloWorldIcon.vue';
-import TerminalApp from './apps/TerminalApp.vue';
-import TerminalIcon from './apps/TerminalIcon.vue';
+import HelloWorldApp from '@/components/apps/HelloWorldApp.vue';
+import type { WindowInstance } from '@/types';
+import { Application, DEFAULT_WINDOW_SIZE } from '@/types';
+import { generateId, getDefaultWindowPosition } from '@/lib';
+import HelloWorldIcon from '@/components/apps/HelloWorldIcon.vue';
+import TerminalApp from '@/components/apps/TerminalApp.vue';
+import TerminalIcon from '@/components/apps/TerminalIcon.vue';
 
 const windows: Ref<WindowInstance[]> = ref([]);
 

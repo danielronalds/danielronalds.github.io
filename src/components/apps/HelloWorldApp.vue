@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Window from '../Window.vue';
-import type { Position, Size } from '../../types';
+import Window from '@/components/Window.vue';
+import type { Position, Size } from '@/types';
 import { Hand } from 'lucide-vue-next';
 
 defineProps<{ id: string }>();

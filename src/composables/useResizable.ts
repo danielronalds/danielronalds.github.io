@@ -1,5 +1,5 @@
 import { ref, type Ref } from 'vue';
-import type { Size } from '../types';
+import type { Size } from '@/types';
 
 export const useResizable = (size: Ref<Size>, minSize: Size = { width: 200, height: 300 }) => {
   const isResizing = ref(false);

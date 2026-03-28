@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Window from '../Window.vue';
-import type { Position, Size } from '../../types';
+import Window from '@/components/Window.vue';
+import type { Position, Size } from '@/types';
 import { SquareTerminal } from 'lucide-vue-next';
 import { useTerminal } from '@/composables/useTerminal';
 import { onMounted, useTemplateRef } from 'vue';

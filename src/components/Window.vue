@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useDraggable } from '../composables/useDraggable';
-import { useResizable } from '../composables/useResizable';
-import type { Position, Size } from '../types';
-import { DEFAULT_WINDOW_SIZE } from '../types';
-import { getDefaultWindowPosition } from '../lib';
+import { useDraggable } from '@/composables/useDraggable';
+import { useResizable } from '@/composables/useResizable';
+import type { Position, Size } from '@/types';
+import { DEFAULT_WINDOW_SIZE } from '@/types';
+import { getDefaultWindowPosition } from '@/lib';
 
 import { Minus, X } from 'lucide-vue-next';
 

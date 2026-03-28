@@ -1,5 +1,5 @@
 import { ref, type Ref } from 'vue';
-import type { Position } from '../types';
+import type { Position } from '@/types';
 
 export const useDraggable = (position: Ref<Position>) => {
   const isDragging = ref(false);
