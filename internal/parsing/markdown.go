@@ -1,23 +1,32 @@
 package parsing
 
 import (
-	"errors"
+	"bytes"
 	"fmt"
+	"os"
+
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
-type HtmlElement interface {
-	Print() string
+type HTMLContent string
+
+func ParseMarkdown(path string) (HTMLContent, error) {
+	markdown, err := os.ReadFile(path)
+	if err != nil {
+		return "", fmt.Errorf("read markdown file %q: %w", path, err)
+	}
+
+	var renderedMarkdown bytes.Buffer
+	if err := markdownParser.Convert(markdown, &renderedMarkdown); err != nil {
+		return "", fmt.Errorf("render markdown file %q: %w", path, err)
+	}
+
+	return HTMLContent(renderedMarkdown.String()), nil
 }
 
-func ParseMarkdown(path string) ([]HtmlElement, error) {
-	return nil, errors.New("not implemented")
-}
-
-type Header struct {
-	level int
-	content string
-}
-
-func (e Header) Print() string {
-	return fmt.Sprintf("<%v class='markdown-h%v'>%s</%v>", e.level, e.level, e.content, e.level)
-}
+var markdownParser = goldmark.New(
+	goldmark.WithExtensions(extension.GFM),
+	goldmark.WithRendererOptions(html.WithUnsafe()),
+)
