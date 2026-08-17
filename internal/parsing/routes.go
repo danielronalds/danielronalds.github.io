@@ -8,14 +8,11 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"github.com/danielronalds/danielronalds.github.io/internal/site"
 )
 
-type Route struct {
-	Src  string
-	Dest string
-}
-
-func ParseRoutes(logger *slog.Logger, srcDir, destDir string) ([]Route, error) {
+func ParseRoutes(logger *slog.Logger, srcDir, destDir string) ([]site.Route, error) {
 	sourceInfo, err := os.Lstat(srcDir)
 	if err != nil {
 		return nil, fmt.Errorf("inspect source directory %q: %w", srcDir, err)
@@ -25,7 +22,7 @@ func ParseRoutes(logger *slog.Logger, srcDir, destDir string) ([]Route, error) {
 		return nil, fmt.Errorf("source path %q is not a directory", srcDir)
 	}
 
-	routes := make([]Route, 0)
+	routes := make([]site.Route, 0)
 	sourcesByDestination := make(map[string]string)
 
 	err = filepath.WalkDir(srcDir, func(path string, entry fs.DirEntry, walkErr error) error {
@@ -82,7 +79,7 @@ func ParseRoutes(logger *slog.Logger, srcDir, destDir string) ([]Route, error) {
 		}
 
 		sourcesByDestination[destinationPath] = path
-		routes = append(routes, Route{Src: path, Dest: destinationPath})
+		routes = append(routes, site.Route{Src: path, Dest: destinationPath})
 		return nil
 	})
 	if err != nil {

@@ -1,6 +1,7 @@
 [tools]
 go = "1.26.3"
 gotestsum = "latest"
+python = "3.14.2"
 
 [tasks.dev]
 description = "Run the project"
@@ -9,3 +10,8 @@ run = "go run ./cmd/blog/ web/ dist/"
 [tasks.test]
 description = "Run the tests"
 run = "gotestsum -- ./..."
+
+[tasks.serve]
+description = "Build and serve the generated site"
+depends = ["dev"]
+run = "python -m http.server 8000 --bind 127.0.0.1 --directory dist/"

@@ -9,6 +9,8 @@ import (
 	"reflect"
 	"strings"
 	"testing"
+
+	"github.com/danielronalds/danielronalds.github.io/internal/site"
 )
 
 func TestParseRoutesProducesRoutesForExampleTree(t *testing.T) {
@@ -27,7 +29,7 @@ func TestParseRoutesProducesRoutesForExampleTree(t *testing.T) {
 		t.Fatalf("ParseRoutes() error = %v", err)
 	}
 
-	expectedRoutes := []Route{
+	expectedRoutes := []site.Route{
 		{Src: filepath.Join(srcDir, "index.md"), Dest: filepath.Join(destDir, "index.html")},
 		{Src: filepath.Join(srcDir, "posts", "building-wade.md"), Dest: filepath.Join(destDir, "posts", "building-wade", "index.html")},
 		{Src: filepath.Join(srcDir, "posts", "index.md"), Dest: filepath.Join(destDir, "posts", "index.html")},
@@ -55,7 +57,7 @@ func TestParseRoutesMapsNestedMarkdownPages(t *testing.T) {
 		t.Fatalf("ParseRoutes() error = %v", err)
 	}
 
-	expectedRoutes := []Route{{
+	expectedRoutes := []site.Route{{
 		Src:  pagePath,
 		Dest: filepath.Join(destDir, "posts", "2026", "hello", "index.html"),
 	}}
@@ -78,7 +80,7 @@ func TestParseRoutesOnlyTreatsExactIndexFilenameAsIndexPage(t *testing.T) {
 		t.Fatalf("ParseRoutes() error = %v", err)
 	}
 
-	expectedRoutes := []Route{
+	expectedRoutes := []site.Route{
 		{Src: filepath.Join(srcDir, "Index.md"), Dest: filepath.Join(destDir, "Index", "index.html")},
 		{Src: filepath.Join(srcDir, "index.md"), Dest: filepath.Join(destDir, "index.html")},
 		{Src: filepath.Join(srcDir, "posts", "index.md"), Dest: filepath.Join(destDir, "posts", "index.html")},
@@ -110,7 +112,7 @@ func TestParseRoutesSkipsUnsupportedFiles(t *testing.T) {
 		t.Fatalf("ParseRoutes() error = %v", err)
 	}
 
-	expectedRoutes := []Route{{
+	expectedRoutes := []site.Route{{
 		Src:  filepath.Join(srcDir, "page.md"),
 		Dest: filepath.Join(destDir, "page", "index.html"),
 	}}
@@ -147,7 +149,7 @@ func TestParseRoutesSkipsHiddenFiles(t *testing.T) {
 		t.Fatalf("ParseRoutes() error = %v", err)
 	}
 
-	expectedRoutes := []Route{{
+	expectedRoutes := []site.Route{{
 		Src:  filepath.Join(srcDir, "published.md"),
 		Dest: filepath.Join(destDir, "published", "index.html"),
 	}}

@@ -5,14 +5,13 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/danielronalds/danielronalds.github.io/internal/site"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/renderer/html"
 )
 
-type HTMLContent string
-
-func ParseMarkdown(path string) (HTMLContent, error) {
+func ParseMarkdown(path string) (site.HTMLContent, error) {
 	markdown, err := os.ReadFile(path)
 	if err != nil {
 		return "", fmt.Errorf("read markdown file %q: %w", path, err)
@@ -23,7 +22,7 @@ func ParseMarkdown(path string) (HTMLContent, error) {
 		return "", fmt.Errorf("render markdown file %q: %w", path, err)
 	}
 
-	return HTMLContent(renderedMarkdown.String()), nil
+	return site.HTMLContent(renderedMarkdown.String()), nil
 }
 
 var markdownParser = goldmark.New(
