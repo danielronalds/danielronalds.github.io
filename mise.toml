@@ -1,6 +1,11 @@
 [tools]
 go = "1.26.3"
+gotestsum = "latest"
 
 [tasks.dev]
 description = "Run the project"
-run = "go run ./cmd/blog/ web/"
+run = "go run ./cmd/blog/ web/ dist/"
+
+[tasks.test]
+description = "Run the tests"
+run = "gotestsum -- ./..."

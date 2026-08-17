@@ -2,26 +2,28 @@ package main
 
 import (
 	"fmt"
+	"log/slog"
 	"os"
 
 	"github.com/danielronalds/danielronalds.github.io/internal/parsing"
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintln(os.Stderr, "no src dir provided")
-		os.Exit(errCodeNoSrcDir)
+	if len(os.Args) != 3 {
+		fmt.Fprintln(os.Stderr, "usage: blog <src-dir> <dest-dir>")
+		os.Exit(errCodeInvalidArguments)
 	}
 
 	srcDir := os.Args[1]
+	destDir := os.Args[2]
 
-	routes, err := parsing.ParseRoutes(srcDir)
+	routes, err := parsing.ParseRoutes(slog.Default(), srcDir, destDir)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "an error occured: %s\n", err.Error())
+		fmt.Fprintf(os.Stderr, "an error occurred: %s\n", err.Error())
 		os.Exit(errCodeFailedToParseRoutes)
 	}
 
 	for _, route := range routes {
-		fmt.Println("%s -> %s", route.Src, route.Dest)
+		fmt.Printf("%s -> %s\n", route.Src, route.Dest)
 	}
 }

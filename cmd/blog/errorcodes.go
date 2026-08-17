@@ -1,6 +1,6 @@
 package main
 
 const (
-	errCodeNoSrcDir = 1
+	errCodeInvalidArguments    = 1
 	errCodeFailedToParseRoutes = 2
 )
